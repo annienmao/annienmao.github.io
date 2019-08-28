@@ -4,21 +4,78 @@
     <meta charset="UTF-8">
     <title>Crypto</title>
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
   </head>
   <body class="w-100 sans-serif light-gray bg-near-black">
-      <div class="ph3 ph5-ns pt4 pb5">
-        <h3 class="f5 mb4 pb2 bb">AES</h3>
-        <p class="lh-copy measure">
-          Basics steps for AES
-        </p>
-        <ul class="list pl0">
-          <li class="f5 pv2 bb b--black-10">
-            step 1
-          </li>
-          <li class="f5 pv2 bb b--black-10">
-            step 2
-          </li>
-        </ul>
+    <div class="ph3 ph5-ns pt4 pb5">
+      <div class="mt5">
+        <h4 class="f6 fw6">Quick Links</h4>
+        <a href="#AES" class="db link fw6 blue dim">AES</a>
+        <a href="#RSA" class="db link fw6 blue dim">RSA</a>
       </div>
+      <h3 class="f5 mb4 pb2 bb"><a id="Cipher"></a>Cipher</h3>
+      <p class="lh-copy measure">
+        Good candidates for one-way functions are:
+      </p>
+      <ul class="list pl0">
+        <li class="f5 pv2">
+          <h5>Factoring</h5>
+          Suppose $$z = (x \cdot y)$$<br>
+          Given z, find x and y.<br>
+        </li>
+        <li class="f5 pv2">
+          <h5>Discrete log</h5>
+          Suppose $$z = x^y \mod m.$$<br>
+          Given z, x and m, find $$y = log_x z \mod m.$$<br>
+        </li>
+      </ul>
+      <h3 class="f5 mb4 pb2 bb"><a id="Cipher"></a>Caesar (Shift) Cipher</h3>
+      <p class="lh-copy measure">
+        Shift each letter by a fixed amount, for example rot13.
+      </p>
+
+      <h5>Breaking Caesar Ciphers <b class="bg-gold black ba b--light-gray">TODO</b></h5>
+      <p class="lh-copy measure">
+        Just brute force it by rotate encrypted text by 1 to n letters, and search for legible text.
+        <br><br>
+        Could it be based 16, 32, 36, 58, 64 or 85?
+      </p>
+      <h3 class="f5 mb4 pb2 bb"><a id="Cipher"></a>Substitution Cipher</h3>
+      <p class="lh-copy measure">
+        Each plaintext is replaced with exactly one ciphertext letter.
+      </p>
+
+      <h5>Breaking Substitution Ciphers <b class="bg-gold black ba b--light-gray">TODO</b></h5>
+      <p class="lh-copy measure">
+        Run frequency analysis on the encrypted text.
+        <br><br>
+        How to break it in reasonable amount of time with very small amount of text?
+      </p>
+
+      <h3 class="f5 mb4 pb2 bb"><a id="AES"></a>AES</h3>
+      <p class="lh-copy measure">
+        Basics steps for AES
+      </p>
+      <ul class="list pl0">
+        <li class="f5 pv2 bb b--black-10">
+          step 1
+        </li>
+        <li class="f5 pv2 bb b--black-10">
+          step 2
+        </li>
+      </ul>
+      <h3 class="f5 mb4 pb2 bb"><a id="RSA"></a>RSA</h3>
+      <p class="lh-copy measure">
+        Basics steps for RSA
+      </p>
+      <ul class="list pl0">
+        <li class="f5 pv2 bb b--black-10">
+          step 1
+        </li>
+        <li class="f5 pv2 bb b--black-10">
+          step 2
+        </li>
+      </ul>
+    </div>
   </body>
 </html>
