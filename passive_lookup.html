@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-07-12 Sun 19:30 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>passive<sub>lookup</sub></title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Annie Mao" />
+<link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+<link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&amp;display=swap" rel="stylesheet">
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.cacheClassElem = elem.className;
+         elem.cacheClassTarget = target.className;
+         target.className = "code-highlighted";
+         elem.className   = "code-highlighted";
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(elem.cacheClassElem)
+         elem.className = elem.cacheClassElem;
+       if(elem.cacheClassTarget)
+         target.className = elem.cacheClassTarget;
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="index.html"> UP </a>
+ |
+ <a accesskey="H" href="index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">passive<sub>lookup</sub></h1>
+<dl class="org-dl">
+<dt>tags</dt><dd></dd>
+</dl>
+
+<div id="outline-container-orgd0d735d" class="outline-2">
+<h2 id="orgd0d735d">Find name servers, ips, and mail servers</h2>
+<div class="outline-text-2" id="text-orgd0d735d">
+</div>
+<div id="outline-container-org4c31483" class="outline-3">
+<h3 id="org4c31483">Sites</h3>
+<div class="outline-text-3" id="text-org4c31483">
+<pre class="example">
+https://www.robtex.com/dns-lookup/&lt;domain_name&gt;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2b1f633" class="outline-2">
+<h2 id="org2b1f633">Harvest Email</h2>
+<div class="outline-text-2" id="text-org2b1f633">
+</div>
+<div id="outline-container-org1152343" class="outline-3">
+<h3 id="org1152343"><a href="https://github.com/laramies/theHarvester">theHarvester</a></h3>
+<div class="outline-text-3" id="text-org1152343">
+<div class="org-src-container">
+<pre class="src src-sh">theHarvester -d &lt;domain&gt; -b google,baidu,linkedin,netcraft
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdb671b6" class="outline-2">
+<h2 id="orgdb671b6">Application Server Identification</h2>
+<div class="outline-text-2" id="text-orgdb671b6">
+</div>
+<div id="outline-container-org22b2abe" class="outline-3">
+<h3 id="org22b2abe"><a href="https://searchdns.netcraft.com/">netcraft</a></h3>
+</div>
+</div>
+<div id="outline-container-orgae32476" class="outline-2">
+<h2 id="orgae32476"><a href="https://www.exploit-db.com/google-hacking-database">Google Hacking Database</a></h2>
+<div class="outline-text-2" id="text-orgae32476">
+<p>
+Some interesting dorks:
+</p>
+<pre class="example">
+site:&lt;domain&gt; -filetype:html
+intext:"&lt;domain&gt;" ext:txt
+</pre>
+</div>
+</div>
+<div id="outline-container-org40ad6c4" class="outline-2">
+<h2 id="org40ad6c4">Service Providers</h2>
+<div class="outline-text-2" id="text-org40ad6c4">
+</div>
+<div id="outline-container-org6c767c7" class="outline-3">
+<h3 id="org6c767c7">Github</h3>
+<div class="outline-text-3" id="text-org6c767c7">
+</div>
+<div id="outline-container-org1813dcf" class="outline-4">
+<h4 id="org1813dcf"><a href="https://github.com/zricethezav/gitleaks">gitleaks</a></h4>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Annie Mao</p>
+<p class="date">Created: 2020-07-12 Sun 19:30</p>
+</div>
+</body>
+</html>

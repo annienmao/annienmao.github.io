@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-07-12 Sun 19:30 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Linux Cheatsheet</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Annie Mao" />
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&amp;display=swap" rel="stylesheet">
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.cacheClassElem = elem.className;
+         elem.cacheClassTarget = target.className;
+         target.className = "code-highlighted";
+         elem.className   = "code-highlighted";
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(elem.cacheClassElem)
+         elem.className = elem.cacheClassElem;
+       if(elem.cacheClassTarget)
+         target.className = elem.cacheClassTarget;
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">Linux Cheatsheet</h1>
+<ul class="org-ul">
+<li>tags ::<a href="../linux.html">linux</a></li>
+</ul>
+
+<div id="outline-container-orgf4618df" class="outline-2">
+<h2 id="orgf4618df">Useful CMDS</h2>
+<div class="outline-text-2" id="text-orgf4618df">
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">search a term from all the man pages</span>
+man -k &lt;search_term&gt;
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">make</span><span style="color: #5B6268;"> multiple dirs in a directory</span>
+<span style="color: #ECBE7B;">mkdir</span> -p drink/<span style="color: #51afef;">{</span>tea, coffee, beer<span style="color: #51afef;">}</span>
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">query file from the local db (fast)</span>
+locate &lt;file&gt;
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">find</span><span style="color: #5B6268;"> file by regex (flexible)</span>
+<span style="color: #ECBE7B;">find</span> &lt;path&gt; -name &lt;name_regex&gt;
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">execute specific cmd from `history`</span>
+<span style="color: #51afef; font-weight: bold;">!</span>&lt;line_num&gt;
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">stdin:0, stdout:1, stderr:2</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">direct stderr to a file</span>
+&lt;cmds&gt; <span style="color: #da8548; font-weight: bold;">2</span>&gt; error.text
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">direct stderr to stdout</span>
+&lt;cmds&gt; <span style="color: #da8548; font-weight: bold;">2</span>&gt;&amp;<span style="color: #da8548; font-weight: bold;">1</span>
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">awk</span>
+<span style="color: #ECBE7B;">echo</span> <span style="color: #98be65;">"name::age::job"</span> | awk -F <span style="color: #98be65;">"::"</span> <span style="color: #98be65;">'{print $1, $3}'</span>
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org36938cc" class="outline-3">
+<h3 id="org36938cc">Managing Processes</h3>
+<div class="outline-text-3" id="text-org36938cc">
+<p>
+Suspending job may have side effects if the job is doing things like waiting on network responses.
+</p>
+<ul class="org-ul">
+<li>Ctrl+Z: suspend a running job</li>
+<li>bg: running the job in the backgroud</li>
+</ul>
+
+<p>
+`jobs`: list running jobs in the current terminal session
+`fg %&lt;job<sub>num</sub>&gt;`: returns job to the foreground
+</p>
+
+<p>
+`ps`: list processes system-wide, check software running in the current machine to figure out what exploit to use
+`ps -ef`: -e all processes, -f full format listing
+`ps -fC &lt;cmd name&gt;`: return the processes for that cmd
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1fd3ff6" class="outline-3">
+<h3 id="org1fd3ff6">file &amp; command monitoring</h3>
+<div class="outline-text-3" id="text-org1fd3ff6">
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">see if a client pings back the server due to exploit</span>
+tail -f /var/log/apach2/access.log
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">check output of a command every 5s</span>
+watch -n <span style="color: #da8548; font-weight: bold;">5</span> &lt;cmd&gt;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org82b16d6" class="outline-3">
+<h3 id="org82b16d6">Download files</h3>
+<div class="outline-text-3" id="text-org82b16d6">
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">http &amp; fpt download</span>
+wget -O &lt;name_on_local_machince&gt; &lt;remote_url&gt;
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">host of protocols</span>
+<span style="color: #ECBE7B;">curl</span> -o &lt;output_filename&gt; &lt;remote_url&gt;
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">Speedy transfer file with multiple connections via http or ftp, -a concise progress indicator</span>
+axel -a -n &lt;num_of_connections&gt; -o &lt;output_filename&gt; &lt;remote_url&gt;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org74a5c85" class="outline-3">
+<h3 id="org74a5c85">History customization</h3>
+<div class="outline-text-3" id="text-org74a5c85">
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">filter out duplicate commands</span>
+<span style="color: #c678dd;">export</span> <span style="color: #dcaeea;">HISTCONTROL</span>=ignoredups
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">ignore frequently used commands</span>
+<span style="color: #c678dd;">export</span> <span style="color: #dcaeea;">HISTIGNORE</span>=<span style="color: #98be65;">"&amp;:ls:[bf]g:exit:history"</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">add timestamp to history, check strftime for more time format</span>
+<span style="color: #c678dd;">export</span> <span style="color: #dcaeea;">HISTTIMEFORMAT</span>=<span style="color: #98be65;">'%F %T '</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8ff69e2" class="outline-3">
+<h3 id="org8ff69e2">Uncompress files</h3>
+<div class="outline-text-3" id="text-org8ff69e2">
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">for tar.gz</span>
+tar -zxf &lt;file&gt;.tar.gz
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">for .gz</span>
+gunzip &lt;file&gt;.gz
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org505500b" class="outline-2">
+<h2 id="org505500b">Kali Specific</h2>
+<div class="outline-text-2" id="text-org505500b">
+<p>
+Network services are disabled by default on Kali, it is recommended to change the default password first before starting these services like ssh and apache2 for http.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Start ssh service</span>
+<span style="color: #ECBE7B;">sudo</span> systemctl start ssh
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">verify ssh service running</span>
+<span style="color: #ECBE7B;">sudo</span> ss -antlp | <span style="color: #ECBE7B;">grep</span> sshd
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">set ssh service to start on boot</span>
+<span style="color: #ECBE7B;">sudo</span> systemctl enable ssh
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">check which services are enabled</span>
+systemctl list-unit-files
+</pre>
+</div>
+
+<p>
+Check network config
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">ip a s
+</pre>
+</div>
+
+<p>
+It's a good idea to take a snapshot of vm before upgrading its packages.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">check if an application is in the kali repo</span>
+apt-cache search &lt;package_name&gt;
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">show description of a package</span>
+apt show &lt;package_name&gt;
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">uninstall packages, --purge removes user config</span>
+apt remove --purge &lt;package_name&gt;
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">install a package offline, it doesn't install any dependencies</span>
+dpkg -i &lt;path_to_file&gt;
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">check if a package is installed</span>
+apt-cache policy &lt;package_name&gt;
+</pre>
+</div>
+
+<p>
+Free <a href="https://kali.training/lessons/introduction/">Kail training</a> for more info.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc356f30" class="outline-2">
+<h2 id="orgc356f30">Useful Linux Concept</h2>
+<div class="outline-text-2" id="text-orgc356f30">
+<ul class="org-ul">
+<li>`export` variables are accessible globally among all the bash shells, whereas the regular variable assignment is only visible in the current shell.</li>
+<li>`env` prints out all the environment variables</li>
+<li>$HISTSIZE: number of cmds stored in memory for the current session</li>
+<li>$HISTFILESIZE: how many cmds are kept inside .bash<sub>history</sub> file</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org54bafa6" class="outline-2">
+<h2 id="org54bafa6">Security Specific</h2>
+<div class="outline-text-2" id="text-org54bafa6">
+<p>
+Analyze access.log
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">find</span><span style="color: #5B6268;"> unique ips by occurrances</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">sort -r: reverse -u: uniq -k key1,key2 -n numberic-sort</span>
+<span style="color: #ECBE7B;">cat</span> access.log | cut -d <span style="color: #98be65;">" "</span> -f <span style="color: #da8548; font-weight: bold;">1</span> | sort | uniq -c | sort -rn
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">look up request by ip</span>
+<span style="color: #ECBE7B;">cat</span> access.log | <span style="color: #ECBE7B;">grep</span> <span style="color: #98be65;">'&lt;ip&gt;'</span> | cut -d <span style="color: #98be65;">"\""</span> -f <span style="color: #da8548; font-weight: bold;">2</span> | uniq -c
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">figure out if a suspicious ip is brute forcing into the server</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">check if any request returns 200</span>
+<span style="color: #ECBE7B;">cat</span> access.log | <span style="color: #ECBE7B;">grep</span> <span style="color: #98be65;">'&lt;ip&gt;'</span> |  <span style="color: #ECBE7B;">grep</span> <span style="color: #98be65;">'&lt;login_page&gt;'</span> | sort -u
+</pre>
+</div>
+
+<p>
+File Comparison
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">comm output col 1: uniq to file a, col 2: uniq to file b, col 3: shared by both</span>
+comm &lt;a&gt; &lt;b&gt;
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">context format, -: lines only in a, +: lines only in b</span>
+diff -c &lt;a&gt; &lt;b&gt;
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">unified format, combime both file in one output</span>
+diff -u &lt;a&gt; &lt;b&gt;
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">visual inspect diff</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">jumping between files: ctrl+w arrow keys</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">] c: jump to next change, [ c: previous change</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">D+O: put diff from other window to current one, D+P: the reverse</span>
+vimdiff &lt;a&gt; &lt;b&gt;
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Annie Mao</p>
+<p class="date">Created: 2020-07-12 Sun 19:30</p>
+</div>
+</body>
+</html>

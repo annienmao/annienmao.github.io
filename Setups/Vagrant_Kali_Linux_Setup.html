@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-07-12 Sun 19:30 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kali Linux Setup using Vagrant</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Annie Mao" />
+<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+<link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&amp;display=swap" rel="stylesheet">
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.cacheClassElem = elem.className;
+         elem.cacheClassTarget = target.className;
+         target.className = "code-highlighted";
+         elem.className   = "code-highlighted";
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(elem.cacheClassElem)
+         elem.className = elem.cacheClassElem;
+       if(elem.cacheClassTarget)
+         target.className = elem.cacheClassTarget;
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">Kali Linux Setup using Vagrant</h1>
+<dl class="org-dl">
+<dt>tags</dt><dd><a href="../binary.html">binary</a> <a href="../vm.html">vm</a><a href="../linux.html"> linux</a></dd>
+</dl>
+
+<div id="outline-container-orgcf44a4e" class="outline-2">
+<h2 id="orgcf44a4e">Instance Setup</h2>
+<div class="outline-text-2" id="text-orgcf44a4e">
+<p>
+Install Vagrant following its official <a href="https://www.vagrantup.com/intro/getting-started">doc</a>.
+</p>
+
+<p>
+Create a Vagrantfile with the following configs for the box:
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">vagrant init kalilinux/rolling
+</pre>
+</div>
+
+<p>
+Uncomment out the network settings to expose a port to connect from the host machine.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">config.vm.network <span style="color: #98be65;">"forwarded_port"</span>, guest: 3000, host: <span style="color: #da8548; font-weight: bold;">8080</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Set up a virtual box</span>
+vagrant box add kalilinux/rolling
+vagrant up
+vagrant ssh
+</pre>
+</div>
+
+<p>
+The current directory on host machine with Vargrantfile is synced with <b>/vagrant</b> directory on the virtual machi f fne.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">virtual instance</span>
+socat TCP-LISTEN:3000,reuseaddr,fork EXEC:<span style="color: #98be65;">"./&lt;binary_to_exploit&gt;"</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">hostname</span>
+nc 127.0.0.1 <span style="color: #da8548; font-weight: bold;">8080</span>
+</pre>
+</div>
+
+<p>
+Cleanup running box and remove image
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">vagrant destory
+vagrant box remove &lt;box_name&gt; --provider &lt;provider&gt; --box-version &lt;version&gt;
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org7736e9e" class="outline-3">
+<h3 id="org7736e9e"><a href="https://www.vagrantup.com/docs/cli/snapshot.html">Managing Snapshot</a></h3>
+<div class="outline-text-3" id="text-org7736e9e">
+<p>
+Use one or the other option, but <b>don't use both</b>!!!
+</p>
+</div>
+<div id="outline-container-orgabd3a5c" class="outline-4">
+<h4 id="orgabd3a5c">push &amp; pop snapshot</h4>
+<div class="outline-text-4" id="text-orgabd3a5c">
+<div class="org-src-container">
+<pre class="src src-shell">vagrant snapshot push
+vagrant snapshot pop
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3714f89" class="outline-4">
+<h4 id="org3714f89">save &amp; restore</h4>
+<div class="outline-text-4" id="text-org3714f89">
+<div class="org-src-container">
+<pre class="src src-shell">vagrant snapshot save <span style="color: #51afef;">[</span>vm-name<span style="color: #51afef;">]</span> NAME
+vagrant snapshot restore <span style="color: #51afef;">[</span>vm-name<span style="color: #51afef;">]</span> NAME
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org88182f6" class="outline-4">
+<h4 id="org88182f6">list snapshot</h4>
+<div class="outline-text-4" id="text-org88182f6">
+<pre class="example">
+vagrant snapshot list
+</pre>
+</div>
+</div>
+<div id="outline-container-org5f2bd1e" class="outline-4">
+<h4 id="org5f2bd1e">delete snapshot</h4>
+<div class="outline-text-4" id="text-org5f2bd1e">
+<pre class="example">
+vagrant snapshot delete [vm-name] NAME
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge90cc8b" class="outline-2">
+<h2 id="orge90cc8b">bootstrap</h2>
+<div class="outline-text-2" id="text-orge90cc8b">
+<p>
+Create a bootstrap.sh in the <b>/vagrant</b> as the startup script. Remember to use <b>-y</b> option for apt-get to suppress its prompt.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #5B6268;">#</span><span style="color: #5B6268;">!/usr/bin/</span><span style="color: #51afef;">env</span><span style="color: #5B6268;"> bash</span>
+
+apt-get update
+apt-get install -y gdb
+</pre>
+</div>
+
+<p>
+Enable vagrant to run this script on startup by adding this setting to Vagrantfile.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">config.vm.provision :shell, path: <span style="color: #98be65;">"bootstrap.sh"</span>
+</pre>
+</div>
+
+<p>
+For already running instance, to trigger the script, run:
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">vagrant reload --provision
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6b0daad" class="outline-2">
+<h2 id="org6b0daad">gdb remote debug session</h2>
+<div class="outline-text-2" id="text-org6b0daad">
+<p>
+Because when running gdb locally, it disables aslr and all the addresses are static. As a result it is a good idea to run the process on the remote server and attach gdb to that process while interating with the running binary over the network from the host machine.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">find</span><span style="color: #5B6268;"> the pid of the process</span>
+gdb --pid=<span style="color: #51afef; font-weight: bold;">`pidof &lt;binary_to_exploit&gt;`</span> &lt;binary_to_exploit&gt;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org77526d8" class="outline-2">
+<h2 id="org77526d8">tmux</h2>
+<div class="outline-text-2" id="text-org77526d8">
+<p>
+I use iTerm2 with tmux to attach multiple local iTerm windows to the same remote ssh session
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">install tmux on mac</span>
+brew install tmux
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">install tmux on linux</span>
+apt-get install tmux
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">In the remote shell start the tmux session</span>
+tmux -CC
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">To re-attach to an existing session</span>
+tmux -CC attach
+</pre>
+</div>
+
+<p>
+Useful tmux + iTerm2 cmds
+</p>
+<pre class="example">
+cmd+t: new tab
+cmd+n: new window
+cmd+d: split veritically
+cmd+shift+d: split horizontally
+cmd+shift+ctrl+d: detaching from tmux
+cmd+opt+arrow: move between pane
+cmd+opt+&lt;num&gt;: move between windows
+</pre>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Annie Mao</p>
+<p class="date">Created: 2020-07-12 Sun 19:30</p>
+</div>
+</body>
+</html>

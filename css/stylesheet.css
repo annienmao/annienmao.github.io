@@ -1,0 +1,89 @@
+body {
+    background-color: #181a26;
+    color: #dedede;
+    font-family: 'Ubuntu Mono', monospace;
+    margin: 0 auto;
+    max-width: 800px;
+    font-size: 100%;
+    padding: 20px 20px 0 20px;
+}
+
+@media only screen and (max-device-width: 480px) {
+    body {
+    max-width: none;
+    font-size: small;
+    }
+}
+
+.title {
+    color: #eaeaea;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 110%;
+    font-weight: 900;
+}
+
+.org-src-container, .example {
+    background-color: #1c1c1c;
+    color: #eaeaea;
+    overflow-x: auto;
+}
+
+.src, pre.example {
+    border: none;
+    box-shadow: none;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.src {
+    padding: 0 15px;
+}
+
+pre.example {
+    padding: 13px 15px;
+}
+
+span.todo {
+    color: #98be65;
+}
+
+li.off code {
+    color: #98be65;
+}
+
+li.on {
+    color: #5B6268;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    color: #eaeaea;
+}
+
+.outline-2 div {
+    padding: 2px 0;
+}
+
+a {
+    color: #eaeaea;
+    text-decoration-style: underline dotted;
+}
+
+a:hover {
+    color: #FFFFFF;
+    text-decoration-style: underline dotted;
+}
+
+a:visited {
+    color: #969896;
+    text-decoration-style: dashed;
+}
+
+a:active {
+    color: #103050;
+}
+
+li {
+    margin: 0 0 3px 0;
+}

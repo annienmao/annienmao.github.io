@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-07-12 Sun 19:30 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>nmap</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Annie Mao" />
+<link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+<link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&amp;display=swap" rel="stylesheet">
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.cacheClassElem = elem.className;
+         elem.cacheClassTarget = target.className;
+         target.className = "code-highlighted";
+         elem.className   = "code-highlighted";
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(elem.cacheClassElem)
+         elem.className = elem.cacheClassElem;
+       if(elem.cacheClassTarget)
+         target.className = elem.cacheClassTarget;
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="index.html"> UP </a>
+ |
+ <a accesskey="H" href="index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">nmap</h1>
+<dl class="org-dl">
+<dt>tags</dt><dd></dd>
+</dl>
+
+<div id="outline-container-orgea6a8fa" class="outline-2">
+<h2 id="orgea6a8fa"><a href="https://nmap.org/book/scan-methods-connect-scan.html">TCP connect scan</a></h2>
+<div class="outline-text-2" id="text-orgea6a8fa">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #ECBE7B;">sudo</span> nmap -sT &lt;ip_addr&gt;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfabeb53" class="outline-2">
+<h2 id="orgfabeb53">UPD Scan</h2>
+<div class="outline-text-2" id="text-orgfabeb53">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #ECBE7B;">sudo</span> nmap -sU &lt;ip_addr&gt;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org427c03c" class="outline-2">
+<h2 id="org427c03c">ping/network sweep</h2>
+<div class="outline-text-2" id="text-org427c03c">
+<div class="org-src-container">
+<pre class="src src-sh">nmap -v -sn -oG ping-sweep.txt &lt;ip-range&gt;
+<span style="color: #ECBE7B;">cat</span> ping-sweep.txt | <span style="color: #ECBE7B;">grep</span> Up | cut -d <span style="color: #98be65;">' '</span> -f2 &gt; online_ips.txt
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org72b62d2" class="outline-2">
+<h2 id="org72b62d2">discover web services</h2>
+<div class="outline-text-2" id="text-org72b62d2">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #ECBE7B;">sudo</span> nmap -sT -sV -A -O -p <span style="color: #da8548; font-weight: bold;">80</span> -iL open_ports.txt &gt; web-sweep-details.txt
+</pre>
+</div>
+<p>
+-oG &lt;filename&gt; will output the results in greppable format.
+</p>
+</div>
+</div>
+<div id="outline-container-orgaa8417f" class="outline-2">
+<h2 id="orgaa8417f">Nmap Script Engine (NSE)</h2>
+<div class="outline-text-2" id="text-orgaa8417f">
+<p>
+All the scripts are located in <code>/usr/share/nmap/scripts</code>, details of each script can be found via <code>nmap --script-help &lt;script&gt;</code>
+</p>
+</div>
+<div id="outline-container-org1054eb1" class="outline-3">
+<h3 id="org1054eb1">Identify running SMB services</h3>
+<div class="outline-text-3" id="text-org1054eb1">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #ECBE7B;">sudo</span> nmap --script=smb-os-discovery -iL online_ips.txt -oG smb-sweep.txt
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org176f6e1" class="outline-3">
+<h3 id="org176f6e1">Initial a DNS zone transfer</h3>
+<div class="outline-text-3" id="text-org176f6e1">
+<div class="org-src-container">
+<pre class="src src-sh">nmap --script=dns-zone-transfer &lt;name_server&gt;
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Annie Mao</p>
+<p class="date">Created: 2020-07-12 Sun 19:30</p>
+</div>
+</body>
+</html>
