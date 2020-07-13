@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-07-12 Sun 19:57 -->
+<!-- 2020-07-12 Sun 20:07 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>active lookup</title>
+<title>Active Lookup</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Annie Mao" />
 <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
@@ -42,18 +42,18 @@
  |
  <a accesskey="H" href="index.html"> HOME </a>
 </div><div id="content">
-<h1 class="title">active lookup</h1>
+<h1 class="title">Active Lookup</h1>
 <dl class="org-dl">
 <dt>tags</dt><dd></dd>
 </dl>
 
-<div id="outline-container-org0dbdb88" class="outline-2">
-<h2 id="org0dbdb88">DNS Enumeration</h2>
-<div class="outline-text-2" id="text-org0dbdb88">
+<div id="outline-container-org30b2a2f" class="outline-2">
+<h2 id="org30b2a2f">DNS Enumeration</h2>
+<div class="outline-text-2" id="text-org30b2a2f">
 </div>
-<div id="outline-container-org7cde832" class="outline-3">
-<h3 id="org7cde832">Brute force with a list of possible hostnames</h3>
-<div class="outline-text-3" id="text-org7cde832">
+<div id="outline-container-org40ee854" class="outline-3">
+<h3 id="org40ee854">Brute force with a list of possible hostnames</h3>
+<div class="outline-text-3" id="text-org40ee854">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #ECBE7B;">sudo</span> apt install seclists
 <span style="color: #51afef;">for</span> hostname<span style="color: #51afef;"> in</span> $<span style="color: #51afef;">(</span><span style="color: #ECBE7B;">cat</span> /usr/share/seclists/Discovery/DNS/deepmagic.com-prefixes-top500.txt<span style="color: #51afef;">)</span>; <span style="color: #51afef;">do</span> host $<span style="color: #dcaeea;">hostname</span>.&lt;domain&gt;; <span style="color: #51afef;">done</span>
@@ -61,9 +61,9 @@
 </div>
 </div>
 </div>
-<div id="outline-container-orgb9d887e" class="outline-3">
-<h3 id="orgb9d887e">Built-in host lookup</h3>
-<div class="outline-text-3" id="text-orgb9d887e">
+<div id="outline-container-org65e4d75" class="outline-3">
+<h3 id="org65e4d75">Built-in host lookup</h3>
+<div class="outline-text-3" id="text-org65e4d75">
 <div class="org-src-container">
 <pre class="src src-sh">host -a &lt;domain&gt;
 </pre>
@@ -74,7 +74,7 @@
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Annie Mao</p>
-<p class="date">Created: 2020-07-12 Sun 19:57</p>
+<p class="date">Created: 2020-07-12 Sun 20:07</p>
 </div>
 </body>
 </html>
